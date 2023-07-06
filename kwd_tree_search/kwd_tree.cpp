@@ -1,6 +1,7 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -94,7 +95,7 @@ void insert(struct kTreeNode* root, string key)
 	pCrawl->isEndOfWord = true;
 }
 
-bool search(struct kTreeNode*, string keyword)
+bool search(struct kTreeNode* root, string keyword)
 {
 	/*
 	Search a keyword tree for a keyword.
@@ -108,9 +109,60 @@ bool search(struct kTreeNode*, string keyword)
 	--------
 	0 if keyword not in tree, else 1
 	*/
+	kTreeNode* temp_tree = root;
 
+	for (int i = 0; i < keyword.size(); i++)
+	{
+		cout << "Keyword index: " << i << endl;
 
-	return 0;
+		if (keyword[i] == 'A')
+		{
+			cout << setw(5) << left << " " << keyword[i] << endl;
+			if (temp_tree->childA)
+			{
+				cout << setw(5) << left << " " << keyword[i];
+				cout << " pointer exists" << endl;
+				temp_tree = temp_tree->childA;
+			}
+			else { return 0; }
+		}
+		else if (keyword[i] == 'G')
+		{
+			cout << setw(5) << left << " " << keyword[i] << endl;
+			if (temp_tree->childG)
+			{
+				cout << setw(5) << left << " " << keyword[i];
+				cout << " pointer exists" << endl;
+				temp_tree = temp_tree->childG;
+			}
+			else { return 0; }
+		}
+		else if (keyword[i] == 'C')
+		{
+			cout << setw(5) << left << " " << keyword[i] << endl;
+			if (temp_tree->childC)
+			{
+				cout << setw(5) << left << " " << keyword[i];
+				cout << " pointer exists" << endl;
+				temp_tree = temp_tree->childC;
+			}
+			else { return 0; }
+		}
+		else if (keyword[i] == 'T')
+		{
+			cout << setw(5) << left << " " << keyword[i] << endl;
+			if (temp_tree->childT)
+			{
+				cout << setw(5) << left << " " << keyword[i];
+				cout << " pointer exists" << endl;
+				temp_tree = temp_tree->childT;
+			}
+			else { return 0; }
+		}
+		else { return 0; }
+	}
+
+	return 1;
 }
 
 
@@ -125,9 +177,16 @@ int main()
 	cout << PROMPT << " G: " << kTreeRoot->childG << endl;
 	cout << PROMPT << " T: " << kTreeRoot->childT << endl;
 	cout << PROMPT << " C: " << kTreeRoot->childC << endl;
-	
+
 	bool a = (kTreeRoot->childC == NULL);
 	cout << PROMPT << " does not exist: " << a << endl;
+
+	cout << "#########SEARCHING##########" << endl;
+	cout << search(kTreeRoot, "ZZ");
+
+	cout << "TESTING" << endl;
+
+
 	system("pause");
 	return 0;
 }
