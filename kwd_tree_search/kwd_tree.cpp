@@ -167,15 +167,12 @@ bool search(struct kTreeNode* root, string keyword)
 		}
 		else { return 0; }
 	}
-
 	/* 
-	Need to examine node children once more to see 
-	if we reached a nullptr
+	Here function returned 0 bc keyword isn't in tree
+	or continues to see if an end node was reached
 	*/
-	return temp_tree->childA ? 0 :
-		temp_tree->childC ? 0 :
-		temp_tree->childG ? 0 :
-		temp_tree->childT ? 0 : 1;
+
+	return temp_tree->isEndOfWord ? 1 : 0;
 }
 
 
@@ -196,7 +193,7 @@ int main()
 	insert(kTreeRoot, "ATA");
 
 	// Vector of test cases
-	vector<string> test_cases{"TA", "ATGC", "A", "GC" };
+	vector<string> test_cases{"TA", "ATGC", "A", "GC", "AT"};
 	// Iterator for vector
 	vector<string>::iterator it = test_cases.begin();
 
