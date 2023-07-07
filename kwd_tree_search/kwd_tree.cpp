@@ -1,5 +1,6 @@
 
 #include <string>
+#include <vector>
 #include <iostream>
 #include <iomanip>
 
@@ -47,7 +48,7 @@ struct kTreeNode* getNode(void)
 
 void insert(struct kTreeNode* root, string key)
 {
-	string TRACE = "Inserting Node";
+	//string TRACE = "Inserting Node";
 	struct kTreeNode* pCrawl = root;
 
 	// go through each character in the keyword
@@ -56,7 +57,7 @@ void insert(struct kTreeNode* root, string key)
 		// if character is 'A'
 		if (key[i] == 'A')
 		{
-			cout << TRACE << "A" << endl;
+			//cout << TRACE << "A" << endl;
 			// if there is not a childA node, create one.
 			if (!pCrawl->childA)
 				pCrawl->childA = getNode();
@@ -65,7 +66,7 @@ void insert(struct kTreeNode* root, string key)
 		// if character is 'T'
 		else if (key[i] == 'T')
 		{
-			cout << TRACE << "T" << endl;
+			//cout << TRACE << "T" << endl;
 			// if there is not a childT node, create one.
 			if (!pCrawl->childT)
 				pCrawl->childT = getNode();
@@ -74,7 +75,7 @@ void insert(struct kTreeNode* root, string key)
 		// if character is 'G'
 		else if (key[i] == 'G')
 		{
-			cout << TRACE << "G" << endl;
+			//cout << TRACE << "G" << endl;
 			// if there is not a childG node, create one.
 			if (!pCrawl->childG)
 				pCrawl->childG = getNode();
@@ -83,7 +84,7 @@ void insert(struct kTreeNode* root, string key)
 		// if character is 'C'
 		else if (key[i] == 'C')
 		{
-			cout << TRACE << "C" << endl;
+			//cout << TRACE << "C" << endl;
 			// if there is not a childC node, create one.
 			if (!pCrawl->childC)
 				pCrawl->childC = getNode();
@@ -113,48 +114,48 @@ bool search(struct kTreeNode* root, string keyword)
 
 	for (int i = 0; i < keyword.size(); i++)
 	{
-		cout << "Keyword index: " << i << endl;
+		//cout << "Keyword index: " << i << endl;
 
 		if (keyword[i] == 'A')
 		{
-			cout << setw(5) << left << " " << keyword[i] << endl;
+			//cout << setw(5) << left << " " << keyword[i] << endl;
 			if (temp_tree->childA)
 			{
-				cout << setw(5) << left << " " << keyword[i];
-				cout << " pointer exists" << endl;
+				//cout << setw(5) << left << " " << keyword[i];
+				//cout << " pointer exists" << endl;
 				temp_tree = temp_tree->childA;
 			}
 			else { return 0; }
 		}
 		else if (keyword[i] == 'G')
 		{
-			cout << setw(5) << left << " " << keyword[i] << endl;
+			//cout << setw(5) << left << " " << keyword[i] << endl;
 			if (temp_tree->childG)
 			{
-				cout << setw(5) << left << " " << keyword[i];
-				cout << " pointer exists" << endl;
+				//cout << setw(5) << left << " " << keyword[i];
+				//cout << " pointer exists" << endl;
 				temp_tree = temp_tree->childG;
 			}
 			else { return 0; }
 		}
 		else if (keyword[i] == 'C')
 		{
-			cout << setw(5) << left << " " << keyword[i] << endl;
+			//cout << setw(5) << left << " " << keyword[i] << endl;
 			if (temp_tree->childC)
 			{
-				cout << setw(5) << left << " " << keyword[i];
-				cout << " pointer exists" << endl;
+				//cout << setw(5) << left << " " << keyword[i];
+				//cout << " pointer exists" << endl;
 				temp_tree = temp_tree->childC;
 			}
 			else { return 0; }
 		}
 		else if (keyword[i] == 'T')
 		{
-			cout << setw(5) << left << " " << keyword[i] << endl;
+			//cout << setw(5) << left << " " << keyword[i] << endl;
 			if (temp_tree->childT)
 			{
-				cout << setw(5) << left << " " << keyword[i];
-				cout << " pointer exists" << endl;
+				//cout << setw(5) << left << " " << keyword[i];
+				//cout << " pointer exists" << endl;
 				temp_tree = temp_tree->childT;
 			}
 			else { return 0; }
@@ -168,11 +169,43 @@ bool search(struct kTreeNode* root, string keyword)
 
 int main()
 {
-	// PROMPT
-	string PROMPT = "Node addr:";
+	// Instantiate keyword tree
+	struct kTreeNode* kTreeRoot = getNode();
 
+	// Insert keywords into keyword tree (creating tree)
+	insert(kTreeRoot, "ATGC");
+	insert(kTreeRoot, "TTA");
+	insert(kTreeRoot, "AT");
+	insert(kTreeRoot, "ATA");
+
+	// Vector of test cases
+	vector<string> test_cases{"TA", "ATGC", "A", "GC" };
+	// Iterator for vector
+	vector<string>::iterator it = test_cases.begin();
+
+	// Iterate
+	for (; it < test_cases.end(); it++)
+	{
+		cout << "Test Case: " << *it << endl;
+		if (search(kTreeRoot, *it)) { cout << "Exists" << endl; }
+		else { cout << "Does not exist." << endl; }
+		cout << endl;
+	}
+
+	system("pause");
+	return 0;
+}
+
+
+
+// Extra code for tracing/debugging
+/*
+	Below:
 	struct kTreeNode* kTreeRoot = getNode();
 	insert(kTreeRoot, "ATTA");
+
+	Add:
+	string PROMPT = "Node addr:";
 	cout << PROMPT << " A: " << kTreeRoot->childA << endl;
 	cout << PROMPT << " G: " << kTreeRoot->childG << endl;
 	cout << PROMPT << " T: " << kTreeRoot->childT << endl;
@@ -181,12 +214,4 @@ int main()
 	bool a = (kTreeRoot->childC == NULL);
 	cout << PROMPT << " does not exist: " << a << endl;
 
-	cout << "#########SEARCHING##########" << endl;
-	cout << search(kTreeRoot, "ZZ");
-
-	cout << "TESTING" << endl;
-
-
-	system("pause");
-	return 0;
-}
+*/
