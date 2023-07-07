@@ -1,0 +1,12 @@
+Test Case: TA
+Keyword does not exist
+
+Test Case: ATGC
+Keyword exists
+
+Test Case: A
+Keyword exists
+
+Test Case: GC
+Keyword does not exist
+

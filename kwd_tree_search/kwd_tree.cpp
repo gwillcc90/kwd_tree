@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
@@ -169,6 +170,11 @@ bool search(struct kTreeNode* root, string keyword)
 
 int main()
 {
+	// Define file name to create
+	string of_name = "output.txt";
+	// Create & open file for output
+	ofstream outfile; outfile.open(of_name);
+
 	// Instantiate keyword tree
 	struct kTreeNode* kTreeRoot = getNode();
 
@@ -187,10 +193,23 @@ int main()
 	for (; it < test_cases.end(); it++)
 	{
 		cout << "Test Case: " << *it << endl;
-		if (search(kTreeRoot, *it)) { cout << "Exists" << endl; }
-		else { cout << "Does not exist." << endl; }
+		outfile << "Test Case: " << *it << endl;
+		if (search(kTreeRoot, *it)) 
+		{ 
+			cout << "Keyword exists" << endl; 
+			outfile << "Keyword exists" << endl;
+			outfile << endl;
+		}
+		else 
+		{ 
+			cout << "Does not exist." << endl; 
+			outfile << "Keyword does not exist" << endl;
+			outfile << endl;
+		}
 		cout << endl;
 	}
+
+	outfile.close();
 
 	system("pause");
 	return 0;
