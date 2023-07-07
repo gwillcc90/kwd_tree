@@ -112,12 +112,13 @@ bool search(struct kTreeNode* root, string keyword)
 	0 if keyword not in tree, else 1
 	*/
 	kTreeNode* temp_tree = root;
-
-	for (int i = 0; i < keyword.size(); i++)
+	string::iterator it = keyword.begin();
+	for (; it < keyword.end(); it++)
 	{
 		//cout << "Keyword index: " << i << endl;
-
-		if (keyword[i] == 'A')
+		cout << *it << endl;
+		//if (keyword[i] == 'A')
+		if (*it == 'A')
 		{
 			//cout << setw(5) << left << " " << keyword[i] << endl;
 			if (temp_tree->childA)
@@ -128,7 +129,8 @@ bool search(struct kTreeNode* root, string keyword)
 			}
 			else { return 0; }
 		}
-		else if (keyword[i] == 'G')
+		//else if (keyword[i] == 'G')
+		else if (*it == 'G')
 		{
 			//cout << setw(5) << left << " " << keyword[i] << endl;
 			if (temp_tree->childG)
@@ -139,7 +141,8 @@ bool search(struct kTreeNode* root, string keyword)
 			}
 			else { return 0; }
 		}
-		else if (keyword[i] == 'C')
+		//else if (keyword[i] == 'C')
+		else if (*it == 'C')
 		{
 			//cout << setw(5) << left << " " << keyword[i] << endl;
 			if (temp_tree->childC)
@@ -150,7 +153,8 @@ bool search(struct kTreeNode* root, string keyword)
 			}
 			else { return 0; }
 		}
-		else if (keyword[i] == 'T')
+		//else if (keyword[i] == 'T')
+		else if (*it == 'T')
 		{
 			//cout << setw(5) << left << " " << keyword[i] << endl;
 			if (temp_tree->childT)
@@ -164,7 +168,14 @@ bool search(struct kTreeNode* root, string keyword)
 		else { return 0; }
 	}
 
-	return 1;
+	/* 
+	Need to examine node children once more to see 
+	if we reached a nullptr
+	*/
+	return temp_tree->childA ? 0 :
+		temp_tree->childC ? 0 :
+		temp_tree->childG ? 0 :
+		temp_tree->childT ? 0 : 1;
 }
 
 
